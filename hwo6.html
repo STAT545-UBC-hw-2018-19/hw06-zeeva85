@@ -141,6 +141,8 @@ $(document).ready(function () {
 <li><a href="#exercises-14.3.5.1">Exercises 14.3.5.1</a></li>
 <li><a href="#exercises-14.4.2">Exercises 14.4.2</a></li>
 <li><a href="#exercises-14.4.3.1">Exercises 14.4.3.1</a></li>
+<li><a href="#exercises-14.4.4.1">Exercises 14.4.4.1</a></li>
+<li><a href="#exercises-14.4.5.1">Exercises 14.4.5.1</a></li>
 </ul></li>
 </ul>
 </div>
@@ -156,18 +158,6 @@ $(document).ready(function () {
 <p><strong>Install by running</strong></p>
 <pre><code>install.packages(&quot;packageName&quot;, dependencies = TRUE)</code></pre>
 <p></details></p>
-<pre class="r"><code>install_load_packages &lt;- function() {
-  
-x &lt;- scan(what = &quot;character&quot;)  
-
-if (length(setdiff(x, rownames(installed.packages()))) &gt; 0) {
-  install.packages(setdiff(x, rownames(installed.packages())), dependencies = TRUE)  
-}
-
-sapply(x, library, character.only = TRUE)
-sessionInfo(package = x)
-
-}</code></pre>
 <div id="task-1-character-data" class="section level1">
 <h1>Task 1: Character data</h1>
 <div id="exercises-14.2.5" class="section level2">
@@ -470,11 +460,11 @@ Q14.3.1.1.2 &lt;- &quot;hello\&quot;'\\world&quot; # create and assign matching 
 cat (Q14.3.1.1.1) # check if the string prints the same as the question.</code></pre>
 <pre><code>## &quot;'\</code></pre>
 <pre class="r"><code>str_view(Q14.3.1.1.1, pattern = &quot;\&quot;'\\\\&quot;) # Match Q14.3.1.1.1</code></pre>
-<div id="htmlwidget-68576f4aa3bcf57590ac" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-68576f4aa3bcf57590ac">{"x":{"html":"<ul>\n  <li><span class='match'>\"'\\<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8c7ffabbc88ac4357690" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c7ffabbc88ac4357690">{"x":{"html":"<ul>\n  <li><span class='match'>\"'\\<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>str_view(Q14.3.1.1.2, pattern = &quot;\&quot;\'\\\\&quot;) # Match Q14.3.1.1.2</code></pre>
-<div id="htmlwidget-8c83dbb73571ce2e3706" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8c83dbb73571ce2e3706">{"x":{"html":"<ul>\n  <li>hello<span class='match'>\"'\\<\/span>world<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e7888203d68f8c0ce9cc" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e7888203d68f8c0ce9cc">{"x":{"html":"<ul>\n  <li>hello<span class='match'>\"'\\<\/span>world<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="question-3-1" class="section level3">
 <h3>Question 3</h3>
@@ -484,8 +474,8 @@ cat (Q14.3.1.1.1) # check if the string prints the same as the question.</code><
 
 
 str_view(Q14.3.1.1.3, pattern = &quot;\\..\\..\\..&quot;)</code></pre>
-<div id="htmlwidget-7ae6b2877ec4071202da" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ae6b2877ec4071202da">{"x":{"html":"<ul>\n  <li><span class='match'>.a.n.y<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1323d17ca6e3519b7f96" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1323d17ca6e3519b7f96">{"x":{"html":"<ul>\n  <li><span class='match'>.a.n.y<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="exercises-14.3.2.1" class="section level2">
@@ -499,8 +489,8 @@ str_view(Q14.3.1.1.3, pattern = &quot;\\..\\..\\..&quot;)</code></pre>
 cat (&quot;\\$\\^\\$&quot;) # Test string output for regex \$\^\$</code></pre>
 <pre><code>## \$\^\$</code></pre>
 <pre class="r"><code>str_view(Q14.3.2.1.1, pattern = &quot;\\$\\^\\$&quot;)</code></pre>
-<div id="htmlwidget-f37ddae164ca1dd8e9f8" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f37ddae164ca1dd8e9f8">{"x":{"html":"<ul>\n  <li><span class='match'>$^$<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-637cec6131e3206e8750" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-637cec6131e3206e8750">{"x":{"html":"<ul>\n  <li><span class='match'>$^$<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="question-2-2" class="section level3">
 <h3>Question 2</h3>
@@ -508,22 +498,22 @@ cat (&quot;\\$\\^\\$&quot;) # Test string output for regex \$\^\$</code></pre>
 <p><strong>Words starting with “y”.</strong></p>
 <pre class="r"><code># find words starting with &quot;y&quot; using the &quot;^y&quot;
 str_view(words, pattern = &quot;^y&quot;, match = TRUE) # Use match = TRUE to only show words that match</code></pre>
-<div id="htmlwidget-c5fe64019a8ef67151dd" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c5fe64019a8ef67151dd">{"x":{"html":"<ul>\n  <li><span class='match'>y<\/span>ear<\/li>\n  <li><span class='match'>y<\/span>es<\/li>\n  <li><span class='match'>y<\/span>esterday<\/li>\n  <li><span class='match'>y<\/span>et<\/li>\n  <li><span class='match'>y<\/span>ou<\/li>\n  <li><span class='match'>y<\/span>oung<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-033a19478abd5609fef6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-033a19478abd5609fef6">{"x":{"html":"<ul>\n  <li><span class='match'>y<\/span>ear<\/li>\n  <li><span class='match'>y<\/span>es<\/li>\n  <li><span class='match'>y<\/span>esterday<\/li>\n  <li><span class='match'>y<\/span>et<\/li>\n  <li><span class='match'>y<\/span>ou<\/li>\n  <li><span class='match'>y<\/span>oung<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Words ending with “x”.</strong></p>
 <pre class="r"><code># find words end with &quot;x&quot; using the &quot;x$&quot;
 str_view(words, pattern = &quot;x$&quot;, match = TRUE) # Use match = TRUE to only show words that match</code></pre>
-<div id="htmlwidget-07b1f462014f9fbdd706" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-07b1f462014f9fbdd706">{"x":{"html":"<ul>\n  <li>bo<span class='match'>x<\/span><\/li>\n  <li>se<span class='match'>x<\/span><\/li>\n  <li>si<span class='match'>x<\/span><\/li>\n  <li>ta<span class='match'>x<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e8923e199cc998bbaa51" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e8923e199cc998bbaa51">{"x":{"html":"<ul>\n  <li>bo<span class='match'>x<\/span><\/li>\n  <li>se<span class='match'>x<\/span><\/li>\n  <li>si<span class='match'>x<\/span><\/li>\n  <li>ta<span class='match'>x<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Are exactly three letters long. (Don’t cheat by using <code>str_length()</code>!).</strong></p>
 <pre class="r"><code># use the random sampling where to keep markdown shorter
 str_view(sample(words, 50), pattern = &quot;\\b...\\b&quot;, match = TRUE) # use the boundry before and after three any characters</code></pre>
-<div id="htmlwidget-a505f991f49184adb671" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a505f991f49184adb671">{"x":{"html":"<ul>\n  <li><span class='match'>run<\/span><\/li>\n  <li><span class='match'>ago<\/span><\/li>\n  <li><span class='match'>may<\/span><\/li>\n  <li><span class='match'>bag<\/span><\/li>\n  <li><span class='match'>act<\/span><\/li>\n  <li><span class='match'>leg<\/span><\/li>\n  <li><span class='match'>box<\/span><\/li>\n  <li><span class='match'>way<\/span><\/li>\n  <li><span class='match'>eye<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-644f52c3ea88961d4785" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-644f52c3ea88961d4785">{"x":{"html":"<ul>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>too<\/span><\/li>\n  <li><span class='match'>sit<\/span><\/li>\n  <li><span class='match'>ten<\/span><\/li>\n  <li><span class='match'>far<\/span><\/li>\n  <li><span class='match'>lay<\/span><\/li>\n  <li><span class='match'>tax<\/span><\/li>\n  <li><span class='match'>egg<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Requirement 4: have seven letters or more.</strong></p>
 <pre class="r"><code>str_view(sample(words, 50),  pattern = &quot;\\b.......&quot;, match = TRUE) # use one boundry to define seven letters and more</code></pre>
-<div id="htmlwidget-263fc3a21a0a5b1980e4" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-263fc3a21a0a5b1980e4">{"x":{"html":"<ul>\n  <li><span class='match'>already<\/span><\/li>\n  <li><span class='match'>realise<\/span><\/li>\n  <li><span class='match'>wednesd<\/span>ay<\/li>\n  <li><span class='match'>achieve<\/span><\/li>\n  <li><span class='match'>produce<\/span><\/li>\n  <li><span class='match'>section<\/span><\/li>\n  <li><span class='match'>terribl<\/span>e<\/li>\n  <li><span class='match'>project<\/span><\/li>\n  <li><span class='match'>germany<\/span><\/li>\n  <li><span class='match'>recomme<\/span>nd<\/li>\n  <li><span class='match'>through<\/span><\/li>\n  <li><span class='match'>husband<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9c7530965abed3615379" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c7530965abed3615379">{"x":{"html":"<ul>\n  <li><span class='match'>documen<\/span>t<\/li>\n  <li><span class='match'>opportu<\/span>nity<\/li>\n  <li><span class='match'>problem<\/span><\/li>\n  <li><span class='match'>separat<\/span>e<\/li>\n  <li><span class='match'>measure<\/span><\/li>\n  <li><span class='match'>occasio<\/span>n<\/li>\n  <li><span class='match'>concern<\/span><\/li>\n  <li><span class='match'>presume<\/span><\/li>\n  <li><span class='match'>serious<\/span><\/li>\n  <li><span class='match'>protect<\/span><\/li>\n  <li><span class='match'>terribl<\/span>e<\/li>\n  <li><span class='match'>underst<\/span>and<\/li>\n  <li><span class='match'>college<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="exercises-14.3.3.1" class="section level2">
@@ -533,24 +523,24 @@ str_view(sample(words, 50), pattern = &quot;\\b...\\b&quot;, match = TRUE) # use
 <p><strong>Create regular expressions to find all words that start with a vowel.</strong></p>
 <pre class="r"><code># find words that start with a vowel
 str_view(sample(words, 20), pattern = &quot;^[aeiou]&quot;, match = TRUE) </code></pre>
-<div id="htmlwidget-75d9b0545f0dbad1bbf0" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-75d9b0545f0dbad1bbf0">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>nswer<\/li>\n  <li><span class='match'>o<\/span>ccasion<\/li>\n  <li><span class='match'>o<\/span>ppose<\/li>\n  <li><span class='match'>a<\/span>ppear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-778fadc82da0b29be7e0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-778fadc82da0b29be7e0">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>ffect<\/li>\n  <li><span class='match'>a<\/span>cross<\/li>\n  <li><span class='match'>e<\/span>ven<\/li>\n  <li><span class='match'>o<\/span>ccasion<\/li>\n  <li><span class='match'>e<\/span>xpect<\/li>\n  <li><span class='match'>i<\/span>nsure<\/li>\n  <li><span class='match'>a<\/span>long<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Create regular expressions that only contain consonants. (Hint: thinking about matching “not”-vowels.)</strong></p>
 <pre class="r"><code># find words that without a vowel using the not &quot;^&quot; special character
 str_view(words, pattern = &quot;^aeiou&quot;, match = T)</code></pre>
-<div id="htmlwidget-b676ec81708bafe820ac" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b676ec81708bafe820ac">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c6f6c36b77cb2d061417" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c6f6c36b77cb2d061417">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>There is no words without all the vowels</p>
 <p><strong>Create regular expressions that only end with <code>ed</code>, but not with <code>eed</code>.</strong></p>
 <pre class="r"><code># find words that end with &quot;ed&quot; but not &quot;eed&quot;
 str_view(words, pattern = &quot;[^e]ed$&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-b1e459220a732c949355" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b1e459220a732c949355">{"x":{"html":"<ul>\n  <li><span class='match'>bed<\/span><\/li>\n  <li>hund<span class='match'>red<\/span><\/li>\n  <li><span class='match'>red<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-be04e1022d5dcbc68949" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be04e1022d5dcbc68949">{"x":{"html":"<ul>\n  <li><span class='match'>bed<\/span><\/li>\n  <li>hund<span class='match'>red<\/span><\/li>\n  <li><span class='match'>red<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Create regular expressions that only end with <code>ing</code> or <code>ise</code>.</strong></p>
 <pre class="r"><code># find words that end with &quot;ing&quot; or &quot;ise&quot;
 str_view(words, pattern = &quot;ing$|ise$&quot;, match = TRUE)</code></pre>
-<p><div id="htmlwidget-999282bab60b84bc7876" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-999282bab60b84bc7876">{"x":{"html":"<ul>\n  <li>advert<span class='match'>ise<\/span><\/li>\n  <li>br<span class='match'>ing<\/span><\/li>\n  <li>dur<span class='match'>ing<\/span><\/li>\n  <li>even<span class='match'>ing<\/span><\/li>\n  <li>exerc<span class='match'>ise<\/span><\/li>\n  <li>k<span class='match'>ing<\/span><\/li>\n  <li>mean<span class='match'>ing<\/span><\/li>\n  <li>morn<span class='match'>ing<\/span><\/li>\n  <li>otherw<span class='match'>ise<\/span><\/li>\n  <li>pract<span class='match'>ise<\/span><\/li>\n  <li>ra<span class='match'>ise<\/span><\/li>\n  <li>real<span class='match'>ise<\/span><\/li>\n  <li>r<span class='match'>ing<\/span><\/li>\n  <li>r<span class='match'>ise<\/span><\/li>\n  <li>s<span class='match'>ing<\/span><\/li>\n  <li>surpr<span class='match'>ise<\/span><\/li>\n  <li>th<span class='match'>ing<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> ### Question 2</p>
+<p><div id="htmlwidget-3c9dae954c713fe0a407" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c9dae954c713fe0a407">{"x":{"html":"<ul>\n  <li>advert<span class='match'>ise<\/span><\/li>\n  <li>br<span class='match'>ing<\/span><\/li>\n  <li>dur<span class='match'>ing<\/span><\/li>\n  <li>even<span class='match'>ing<\/span><\/li>\n  <li>exerc<span class='match'>ise<\/span><\/li>\n  <li>k<span class='match'>ing<\/span><\/li>\n  <li>mean<span class='match'>ing<\/span><\/li>\n  <li>morn<span class='match'>ing<\/span><\/li>\n  <li>otherw<span class='match'>ise<\/span><\/li>\n  <li>pract<span class='match'>ise<\/span><\/li>\n  <li>ra<span class='match'>ise<\/span><\/li>\n  <li>real<span class='match'>ise<\/span><\/li>\n  <li>r<span class='match'>ing<\/span><\/li>\n  <li>r<span class='match'>ise<\/span><\/li>\n  <li>s<span class='match'>ing<\/span><\/li>\n  <li>surpr<span class='match'>ise<\/span><\/li>\n  <li>th<span class='match'>ing<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> ### Question 2</p>
 <p>** Create regular expressions that the rule is empirically verified the rule “i” before “e” except after “c”.**</p>
 <p>The sentenece is rather confusing, this is what it means, check for words that have “ie”, and without any “cie”. When “c” present, instead look for “cei”</p>
 <pre class="r"><code>str_subset(words, pattern = &quot;[^c]ie|cei&quot;) # subset not &quot;c&quot;, before ie&quot;, and &quot;cei&quot;</code></pre>
@@ -565,8 +555,8 @@ str_view(words, pattern = &quot;ing$|ise$&quot;, match = TRUE)</code></pre>
 <pre class="r"><code># is &quot;q followed by not u&quot; non elegant manual way
 
 str_view(words, pattern = &quot;q[^u]&quot;, match = T)</code></pre>
-<div id="htmlwidget-09ad9637adce2d1d8198" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-09ad9637adce2d1d8198">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7644e2e341f36453998f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7644e2e341f36453998f">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># is &quot;q followed by not u&quot; more systematic elegant method, 
 
 test_that(&quot;if 'q' is always followed by a 'u'&quot;, {
@@ -603,8 +593,8 @@ britUSAwords &lt;- str_split(britUSAwords[1], pattern = &quot;\n&quot;)
 
 # british spelling has often &quot;ll&quot; followed by any character.
 str_view(britUSAwords, pattern = &quot;.+l{2}&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-0b38a88c683770acd8c4" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0b38a88c683770acd8c4">{"x":{"html":"<ul>\n  <li><span class='match'>c(\"cancelled\", \"counsellor\", \"equalled\", \"fuelling\", \"fuelled\", \"grovell<\/span>ing\", \"canceled\", \"counselor\", \"equaled\", \"fueling\", \"fueled\", \"groveling\")<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d915be9c7eaf5ceaf0d0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d915be9c7eaf5ceaf0d0">{"x":{"html":"<ul>\n  <li><span class='match'>c(\"cancelled\", \"counsellor\", \"equalled\", \"fuelling\", \"fuelled\", \"grovell<\/span>ing\", \"canceled\", \"counselor\", \"equaled\", \"fueling\", \"fueled\", \"groveling\")<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="question-5-1" class="section level3">
 <h3>Question 5</h3>
@@ -615,8 +605,8 @@ telNum &lt;- c(&quot;+60 12 110 0101&quot;, &quot;+1 778 8464 273&quot;, &quot;+
 
 # use a regex to detect telephone numbers in Canada
 str_view(telNum, pattern = &quot;\\+60 [1-9][1-9] [:digit:]{3} [:digit:]{4}&quot;)</code></pre>
-<div id="htmlwidget-533cf203a3c4be2c9d2d" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-533cf203a3c4be2c9d2d">{"x":{"html":"<ul>\n  <li><span class='match'>+60 12 110 0101<\/span><\/li>\n  <li>+1 778 8464 273<\/li>\n  <li>+65  1110 0000<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4f0486a918d3cede1f22" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4f0486a918d3cede1f22">{"x":{"html":"<ul>\n  <li><span class='match'>+60 12 110 0101<\/span><\/li>\n  <li>+1 778 8464 273<\/li>\n  <li>+65  1110 0000<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="exercises-14.3.4.1" class="section level2">
@@ -645,18 +635,18 @@ str_view(telNum, pattern = &quot;\\+60 [1-9][1-9] [:digit:]{3} [:digit:]{4}&quot
 <p><strong>Create regular expressions to find all words that start with three consonants.</strong></p>
 <pre class="r"><code># words start with three consonants
 str_view(words, pattern = &quot;^[^aeoiu]{3}&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-913c26014cd856cc576a" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-913c26014cd856cc576a">{"x":{"html":"<ul>\n  <li><span class='match'>Chr<\/span>ist<\/li>\n  <li><span class='match'>Chr<\/span>istmas<\/li>\n  <li><span class='match'>dry<\/span><\/li>\n  <li><span class='match'>fly<\/span><\/li>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>sch<\/span>eme<\/li>\n  <li><span class='match'>sch<\/span>ool<\/li>\n  <li><span class='match'>str<\/span>aight<\/li>\n  <li><span class='match'>str<\/span>ategy<\/li>\n  <li><span class='match'>str<\/span>eet<\/li>\n  <li><span class='match'>str<\/span>ike<\/li>\n  <li><span class='match'>str<\/span>ong<\/li>\n  <li><span class='match'>str<\/span>ucture<\/li>\n  <li><span class='match'>sys<\/span>tem<\/li>\n  <li><span class='match'>thr<\/span>ee<\/li>\n  <li><span class='match'>thr<\/span>ough<\/li>\n  <li><span class='match'>thr<\/span>ow<\/li>\n  <li><span class='match'>try<\/span><\/li>\n  <li><span class='match'>typ<\/span>e<\/li>\n  <li><span class='match'>why<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3f38f709e7954cff1017" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3f38f709e7954cff1017">{"x":{"html":"<ul>\n  <li><span class='match'>Chr<\/span>ist<\/li>\n  <li><span class='match'>Chr<\/span>istmas<\/li>\n  <li><span class='match'>dry<\/span><\/li>\n  <li><span class='match'>fly<\/span><\/li>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>sch<\/span>eme<\/li>\n  <li><span class='match'>sch<\/span>ool<\/li>\n  <li><span class='match'>str<\/span>aight<\/li>\n  <li><span class='match'>str<\/span>ategy<\/li>\n  <li><span class='match'>str<\/span>eet<\/li>\n  <li><span class='match'>str<\/span>ike<\/li>\n  <li><span class='match'>str<\/span>ong<\/li>\n  <li><span class='match'>str<\/span>ucture<\/li>\n  <li><span class='match'>sys<\/span>tem<\/li>\n  <li><span class='match'>thr<\/span>ee<\/li>\n  <li><span class='match'>thr<\/span>ough<\/li>\n  <li><span class='match'>thr<\/span>ow<\/li>\n  <li><span class='match'>try<\/span><\/li>\n  <li><span class='match'>typ<\/span>e<\/li>\n  <li><span class='match'>why<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Create regular expressions to find all words that have three or more vowels in a row.</strong></p>
 <pre class="r"><code># words that have three or more vowels in a row 
 str_view(words, pattern = &quot;[aeoiu]{3,}&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-bf73a71e24dd0b31cfe1" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bf73a71e24dd0b31cfe1">{"x":{"html":"<ul>\n  <li>b<span class='match'>eau<\/span>ty<\/li>\n  <li>obv<span class='match'>iou<\/span>s<\/li>\n  <li>prev<span class='match'>iou<\/span>s<\/li>\n  <li>q<span class='match'>uie<\/span>t<\/li>\n  <li>ser<span class='match'>iou<\/span>s<\/li>\n  <li>var<span class='match'>iou<\/span>s<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c705d6f477655693649f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c705d6f477655693649f">{"x":{"html":"<ul>\n  <li>b<span class='match'>eau<\/span>ty<\/li>\n  <li>obv<span class='match'>iou<\/span>s<\/li>\n  <li>prev<span class='match'>iou<\/span>s<\/li>\n  <li>q<span class='match'>uie<\/span>t<\/li>\n  <li>ser<span class='match'>iou<\/span>s<\/li>\n  <li>var<span class='match'>iou<\/span>s<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Create regular expressions to find all words that have two or more vowel-consonant pairs in a row.</strong></p>
 <pre class="r"><code># words that have two or more vowel-consonant pairs in a row
 str_view(sample(words, 50), pattern = &quot;([aeoui][^aeoiu]){2,}&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-8e7708ec5e64c018549b" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8e7708ec5e64c018549b">{"x":{"html":"<ul>\n  <li>comm<span class='match'>unit<\/span>y<\/li>\n  <li>pr<span class='match'>epar<\/span>e<\/li>\n  <li>pr<span class='match'>oces<\/span>s<\/li>\n  <li>m<span class='match'>usic<\/span><\/li>\n  <li>d<span class='match'>epen<\/span>d<\/li>\n  <li>abs<span class='match'>olut<\/span>e<\/li>\n  <li><span class='match'>eviden<\/span>ce<\/li>\n  <li>r<span class='match'>esul<\/span>t<\/li>\n  <li>app<span class='match'>aren<\/span>t<\/li>\n  <li>st<span class='match'>upid<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7c9f4d84b920f43d3aa1" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7c9f4d84b920f43d3aa1">{"x":{"html":"<ul>\n  <li>org<span class='match'>aniz<\/span>e<\/li>\n  <li>b<span class='match'>efor<\/span>e<\/li>\n  <li><span class='match'>over<\/span><\/li>\n  <li>l<span class='match'>ikel<\/span>y<\/li>\n  <li><span class='match'>unit<\/span>e<\/li>\n  <li>b<span class='match'>usines<\/span>s<\/li>\n  <li><span class='match'>eviden<\/span>ce<\/li>\n  <li><span class='match'>awar<\/span>e<\/li>\n  <li>s<span class='match'>ecur<\/span>e<\/li>\n  <li>f<span class='match'>inal<\/span><\/li>\n  <li>opport<span class='match'>unit<\/span>y<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="question-4-2" class="section level3">
 <h3>Question 4</h3>
@@ -691,18 +681,18 @@ str_view(sample(words, 50), pattern = &quot;([aeoui][^aeoiu]){2,}&quot;, match =
 <p><strong>Construct regular expressions to match words that start and end with the same character.</strong></p>
 <pre class="r"><code># match words that start and end with the same character
 str_view(words, pattern = &quot;^(.).*\\1$&quot;, match = TRUE) </code></pre>
-<div id="htmlwidget-a4cd76f4b452df8ad86e" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a4cd76f4b452df8ad86e">{"x":{"html":"<ul>\n  <li><span class='match'>america<\/span><\/li>\n  <li><span class='match'>area<\/span><\/li>\n  <li><span class='match'>dad<\/span><\/li>\n  <li><span class='match'>dead<\/span><\/li>\n  <li><span class='match'>depend<\/span><\/li>\n  <li><span class='match'>educate<\/span><\/li>\n  <li><span class='match'>else<\/span><\/li>\n  <li><span class='match'>encourage<\/span><\/li>\n  <li><span class='match'>engine<\/span><\/li>\n  <li><span class='match'>europe<\/span><\/li>\n  <li><span class='match'>evidence<\/span><\/li>\n  <li><span class='match'>example<\/span><\/li>\n  <li><span class='match'>excuse<\/span><\/li>\n  <li><span class='match'>exercise<\/span><\/li>\n  <li><span class='match'>expense<\/span><\/li>\n  <li><span class='match'>experience<\/span><\/li>\n  <li><span class='match'>eye<\/span><\/li>\n  <li><span class='match'>health<\/span><\/li>\n  <li><span class='match'>high<\/span><\/li>\n  <li><span class='match'>knock<\/span><\/li>\n  <li><span class='match'>level<\/span><\/li>\n  <li><span class='match'>local<\/span><\/li>\n  <li><span class='match'>nation<\/span><\/li>\n  <li><span class='match'>non<\/span><\/li>\n  <li><span class='match'>rather<\/span><\/li>\n  <li><span class='match'>refer<\/span><\/li>\n  <li><span class='match'>remember<\/span><\/li>\n  <li><span class='match'>serious<\/span><\/li>\n  <li><span class='match'>stairs<\/span><\/li>\n  <li><span class='match'>test<\/span><\/li>\n  <li><span class='match'>tonight<\/span><\/li>\n  <li><span class='match'>transport<\/span><\/li>\n  <li><span class='match'>treat<\/span><\/li>\n  <li><span class='match'>trust<\/span><\/li>\n  <li><span class='match'>window<\/span><\/li>\n  <li><span class='match'>yesterday<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f3455ac51d476efc1c55" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3455ac51d476efc1c55">{"x":{"html":"<ul>\n  <li><span class='match'>america<\/span><\/li>\n  <li><span class='match'>area<\/span><\/li>\n  <li><span class='match'>dad<\/span><\/li>\n  <li><span class='match'>dead<\/span><\/li>\n  <li><span class='match'>depend<\/span><\/li>\n  <li><span class='match'>educate<\/span><\/li>\n  <li><span class='match'>else<\/span><\/li>\n  <li><span class='match'>encourage<\/span><\/li>\n  <li><span class='match'>engine<\/span><\/li>\n  <li><span class='match'>europe<\/span><\/li>\n  <li><span class='match'>evidence<\/span><\/li>\n  <li><span class='match'>example<\/span><\/li>\n  <li><span class='match'>excuse<\/span><\/li>\n  <li><span class='match'>exercise<\/span><\/li>\n  <li><span class='match'>expense<\/span><\/li>\n  <li><span class='match'>experience<\/span><\/li>\n  <li><span class='match'>eye<\/span><\/li>\n  <li><span class='match'>health<\/span><\/li>\n  <li><span class='match'>high<\/span><\/li>\n  <li><span class='match'>knock<\/span><\/li>\n  <li><span class='match'>level<\/span><\/li>\n  <li><span class='match'>local<\/span><\/li>\n  <li><span class='match'>nation<\/span><\/li>\n  <li><span class='match'>non<\/span><\/li>\n  <li><span class='match'>rather<\/span><\/li>\n  <li><span class='match'>refer<\/span><\/li>\n  <li><span class='match'>remember<\/span><\/li>\n  <li><span class='match'>serious<\/span><\/li>\n  <li><span class='match'>stairs<\/span><\/li>\n  <li><span class='match'>test<\/span><\/li>\n  <li><span class='match'>tonight<\/span><\/li>\n  <li><span class='match'>transport<\/span><\/li>\n  <li><span class='match'>treat<\/span><\/li>\n  <li><span class='match'>trust<\/span><\/li>\n  <li><span class='match'>window<\/span><\/li>\n  <li><span class='match'>yesterday<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Construct regular expressions to match words that contain a repeated pair of letters (e.g. “church” contains “ch” repeated twice.)</strong></p>
 <pre class="r"><code># find words that contain a repeated pair of letters
 str_view(words, pattern = &quot;(..).*\\1&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-a4f0e7127fe456fe84b2" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a4f0e7127fe456fe84b2">{"x":{"html":"<ul>\n  <li>ap<span class='match'>propr<\/span>iate<\/li>\n  <li><span class='match'>church<\/span><\/li>\n  <li>c<span class='match'>ondition<\/span><\/li>\n  <li><span class='match'>decide<\/span><\/li>\n  <li><span class='match'>environmen<\/span>t<\/li>\n  <li>l<span class='match'>ondon<\/span><\/li>\n  <li>pa<span class='match'>ragra<\/span>ph<\/li>\n  <li>p<span class='match'>articular<\/span><\/li>\n  <li><span class='match'>photograph<\/span><\/li>\n  <li>p<span class='match'>repare<\/span><\/li>\n  <li>p<span class='match'>ressure<\/span><\/li>\n  <li>r<span class='match'>emem<\/span>ber<\/li>\n  <li><span class='match'>repre<\/span>sent<\/li>\n  <li><span class='match'>require<\/span><\/li>\n  <li><span class='match'>sense<\/span><\/li>\n  <li>the<span class='match'>refore<\/span><\/li>\n  <li>u<span class='match'>nderstand<\/span><\/li>\n  <li>w<span class='match'>hethe<\/span>r<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c5113bc5892313903890" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c5113bc5892313903890">{"x":{"html":"<ul>\n  <li>ap<span class='match'>propr<\/span>iate<\/li>\n  <li><span class='match'>church<\/span><\/li>\n  <li>c<span class='match'>ondition<\/span><\/li>\n  <li><span class='match'>decide<\/span><\/li>\n  <li><span class='match'>environmen<\/span>t<\/li>\n  <li>l<span class='match'>ondon<\/span><\/li>\n  <li>pa<span class='match'>ragra<\/span>ph<\/li>\n  <li>p<span class='match'>articular<\/span><\/li>\n  <li><span class='match'>photograph<\/span><\/li>\n  <li>p<span class='match'>repare<\/span><\/li>\n  <li>p<span class='match'>ressure<\/span><\/li>\n  <li>r<span class='match'>emem<\/span>ber<\/li>\n  <li><span class='match'>repre<\/span>sent<\/li>\n  <li><span class='match'>require<\/span><\/li>\n  <li><span class='match'>sense<\/span><\/li>\n  <li>the<span class='match'>refore<\/span><\/li>\n  <li>u<span class='match'>nderstand<\/span><\/li>\n  <li>w<span class='match'>hethe<\/span>r<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><strong>Construct regular expressions to match words that contain one letter repeated in at least three places (e.g. “eleven” contains three “e”s.)</strong></p>
 <pre class="r"><code># match words that contain one letter repeated in at least three places
 str_view(words, pattern = &quot;(.).*\\1.*\\1&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-edfc2e5f2b40479f1330" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-edfc2e5f2b40479f1330">{"x":{"html":"<ul>\n  <li>a<span class='match'>pprop<\/span>riate<\/li>\n  <li><span class='match'>availa<\/span>ble<\/li>\n  <li>b<span class='match'>elieve<\/span><\/li>\n  <li>b<span class='match'>etwee<\/span>n<\/li>\n  <li>bu<span class='match'>siness<\/span><\/li>\n  <li>d<span class='match'>egree<\/span><\/li>\n  <li>diff<span class='match'>erence<\/span><\/li>\n  <li>di<span class='match'>scuss<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li>e<span class='match'>nvironmen<\/span>t<\/li>\n  <li><span class='match'>evidence<\/span><\/li>\n  <li><span class='match'>exercise<\/span><\/li>\n  <li><span class='match'>expense<\/span><\/li>\n  <li><span class='match'>experience<\/span><\/li>\n  <li><span class='match'>indivi<\/span>dual<\/li>\n  <li>p<span class='match'>aragra<\/span>ph<\/li>\n  <li>r<span class='match'>eceive<\/span><\/li>\n  <li>r<span class='match'>emembe<\/span>r<\/li>\n  <li>r<span class='match'>eprese<\/span>nt<\/li>\n  <li>t<span class='match'>elephone<\/span><\/li>\n  <li>th<span class='match'>erefore<\/span><\/li>\n  <li>t<span class='match'>omorro<\/span>w<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c7a2f5667af1af7d889c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7a2f5667af1af7d889c">{"x":{"html":"<ul>\n  <li>a<span class='match'>pprop<\/span>riate<\/li>\n  <li><span class='match'>availa<\/span>ble<\/li>\n  <li>b<span class='match'>elieve<\/span><\/li>\n  <li>b<span class='match'>etwee<\/span>n<\/li>\n  <li>bu<span class='match'>siness<\/span><\/li>\n  <li>d<span class='match'>egree<\/span><\/li>\n  <li>diff<span class='match'>erence<\/span><\/li>\n  <li>di<span class='match'>scuss<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li>e<span class='match'>nvironmen<\/span>t<\/li>\n  <li><span class='match'>evidence<\/span><\/li>\n  <li><span class='match'>exercise<\/span><\/li>\n  <li><span class='match'>expense<\/span><\/li>\n  <li><span class='match'>experience<\/span><\/li>\n  <li><span class='match'>indivi<\/span>dual<\/li>\n  <li>p<span class='match'>aragra<\/span>ph<\/li>\n  <li>r<span class='match'>eceive<\/span><\/li>\n  <li>r<span class='match'>emembe<\/span>r<\/li>\n  <li>r<span class='match'>eprese<\/span>nt<\/li>\n  <li>t<span class='match'>elephone<\/span><\/li>\n  <li>th<span class='match'>erefore<\/span><\/li>\n  <li>t<span class='match'>omorro<\/span>w<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="exercises-14.4.2" class="section level2">
@@ -857,16 +847,269 @@ stringr::words %&gt;%
 <pre><code>## [1] &quot;red|orange|yellow|green|blue|purple&quot;</code></pre>
 <pre class="r"><code>more &lt;- sentences[str_count(sentences, colour_match) &gt; 1]
 str_view_all(more, colour_match)</code></pre>
-<div id="htmlwidget-6f9b808f5c6188cdc800" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6f9b808f5c6188cdc800">{"x":{"html":"<ul>\n  <li>It is hard to erase <span class='match'>blue<\/span> or <span class='match'>red<\/span> ink.<\/li>\n  <li>The <span class='match'>green<\/span> light in the brown box flicke<span class='match'>red<\/span>.<\/li>\n  <li>The sky in the west is tinged with <span class='match'>orange<\/span> <span class='match'>red<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3198bc3323a987880160" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3198bc3323a987880160">{"x":{"html":"<ul>\n  <li>It is hard to erase <span class='match'>blue<\/span> or <span class='match'>red<\/span> ink.<\/li>\n  <li>The <span class='match'>green<\/span> light in the brown box flicke<span class='match'>red<\/span>.<\/li>\n  <li>The sky in the west is tinged with <span class='match'>orange<\/span> <span class='match'>red<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>(flickred &lt;- str_c(&quot;\\b&quot;, colour_match, &quot;\\b&quot;)) # boundry word matches \b to regex</code></pre>
 <pre><code>## [1] &quot;\\bred|orange|yellow|green|blue|purple\\b&quot;</code></pre>
 <pre class="r"><code># view sentences with more than 1 match
 more &lt;- sentences[str_count(sentences, flickred) &gt; 1]
 str_view_all(more, flickred)</code></pre>
-<div id="htmlwidget-ab849b654776d52472d5" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ab849b654776d52472d5">{"x":{"html":"<ul>\n  <li>It is hard to erase <span class='match'>blue<\/span> or <span class='match'>red<\/span> ink.<\/li>\n  <li>The sky in the west is tinged with <span class='match'>orange<\/span> <span class='match'>red<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<p>U</p>
+<div id="htmlwidget-3af90b5334be06b89989" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3af90b5334be06b89989">{"x":{"html":"<ul>\n  <li>It is hard to erase <span class='match'>blue<\/span> or <span class='match'>red<\/span> ink.<\/li>\n  <li>The sky in the west is tinged with <span class='match'>orange<\/span> <span class='match'>red<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>se “\b” in regex. “\b” works at looking for whole words on searches.</p>
+</div>
+<div id="question-2-6" class="section level3">
+<h3>Question 2</h3>
+<p><strong>From the Harvard sentences data, extract the following words.</strong></p>
+<p><strong>The first word from each sentence.</strong></p>
+<p><code>str_extract()</code> extracts the first match in a string.</p>
+<pre class="r"><code>sample &lt;-sample(sentences, 20) # Set a random 20 sample from the sentences 
+
+first_words &lt;- str_extract(sample, &quot;[a-zA-Z]+&quot;) # str_extract for first word
+
+tibble(sample, first_words) %&gt;% 
+  knitr::kable(col.names = c(&quot;Sentences&quot;, &quot;1st-word&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sentences</th>
+<th align="left">1st-word</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Next Tuesday we must vote.</td>
+<td align="left">Next</td>
+</tr>
+<tr class="even">
+<td align="left">Drop the ashes on the worn old rug.</td>
+<td align="left">Drop</td>
+</tr>
+<tr class="odd">
+<td align="left">The doorknob was made of bright clean brass.</td>
+<td align="left">The</td>
+</tr>
+<tr class="even">
+<td align="left">Mark the spot with a sign painted red.</td>
+<td align="left">Mark</td>
+</tr>
+<tr class="odd">
+<td align="left">The beetle droned in the hot June sun.</td>
+<td align="left">The</td>
+</tr>
+<tr class="even">
+<td align="left">A wisp of cloud hung in the blue air.</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="left">Green ice frosted the punch bowl.</td>
+<td align="left">Green</td>
+</tr>
+<tr class="even">
+<td align="left">Steam hissed from the broken valve.</td>
+<td align="left">Steam</td>
+</tr>
+<tr class="odd">
+<td align="left">At that high level the air is pure.</td>
+<td align="left">At</td>
+</tr>
+<tr class="even">
+<td align="left">She called his name many times.</td>
+<td align="left">She</td>
+</tr>
+<tr class="odd">
+<td align="left">Many hands help get the job done.</td>
+<td align="left">Many</td>
+</tr>
+<tr class="even">
+<td align="left">Where were they when the noise started.</td>
+<td align="left">Where</td>
+</tr>
+<tr class="odd">
+<td align="left">Jump the fence and hurry up the bank.</td>
+<td align="left">Jump</td>
+</tr>
+<tr class="even">
+<td align="left">Either mud or dust are found at all times.</td>
+<td align="left">Either</td>
+</tr>
+<tr class="odd">
+<td align="left">The Navy attacked the big task force.</td>
+<td align="left">The</td>
+</tr>
+<tr class="even">
+<td align="left">The petals fall with the next puff of wind.</td>
+<td align="left">The</td>
+</tr>
+<tr class="odd">
+<td align="left">Pink clouds floated JTith the breeze.</td>
+<td align="left">Pink</td>
+</tr>
+<tr class="even">
+<td align="left">One step more and the board will collapse.</td>
+<td align="left">One</td>
+</tr>
+<tr class="odd">
+<td align="left">The heart beat strongly and with firm strokes.</td>
+<td align="left">The</td>
+</tr>
+<tr class="even">
+<td align="left">Whitings are small fish caught in nets.</td>
+<td align="left">Whitings</td>
+</tr>
+</tbody>
+</table>
+<p><strong>All words ending in <code>ing</code>.</strong></p>
+<p><code>str_extract_all()</code> tries to extract all matches from a string, and put them into a vector.</p>
+<pre class="r"><code>end_ing &lt;- str_extract_all(sentences, &quot;\\b[a-zA-Z]+ing\\b&quot;, simplify = TRUE) # str_extract_all to get words in 'ing'
+
+
+end_ing2 &lt;- end_ing[end_ing != &quot;&quot;] # every sentence only contains one words ending in &quot;ing&quot;, remove all empty element
+
+head(tibble(sentences[end_ing != &quot;&quot;], end_ing2)) </code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   `sentences[end_ing != &quot;&quot;]`                        end_ing2
+##   &lt;chr&gt;                                             &lt;chr&gt;   
+## 1 The source of the huge river is the clear spring. spring  
+## 2 A pot of tea helps to pass the evening.           evening 
+## 3 It snowed, rained, and hailed the same morning.   morning 
+## 4 Take the winding path to reach the lake.          winding 
+## 5 What joy there is in living.                      living  
+## 6 A king ruled the state in the early days.         king</code></pre>
+<p><strong>All plurals.</strong></p>
+<p>Use multiple <code>str_detect</code> as it is too complicated to get all plurals in regex.</p>
+<pre class="r"><code>regex &lt;- &quot;\\b[a-zA-Z]{3,}(ses|sses|shes|ches|xes|zes|sses|zzes|ves|ies|oes|s)\\b&quot; # regex pattern
+
+sing &lt;- sentences[str_detect(sentences, regex)]
+
+pluralSen &lt;- str_extract_all(sing, pattern = regex, simplify = TRUE)
+
+data.frame(sing, pluralSen)[25:35,] </code></pre>
+<pre><code>##                                                sing      X1     X2     X3
+## 25           Place a rosebush near the porch steps.   steps              
+## 26       Both lost their lives in the raging storm.   lives              
+## 27       We talked of the slide show in the circus.  circus              
+## 28              A small creek cut across the field.  across              
+## 29          Cars and busses stalled in snow drifts.    Cars busses drifts
+## 30    This is a grand season for hikes on the road.    This  hikes       
+## 31 Those words were the cue for the actor to leave.   words              
+## 32              The lease ran out in sixteen weeks.   weeks              
+## 33                A tame squirrel makes a nice pet.   makes              
+## 34   The heart beat strongly and with firm strokes. strokes              
+## 35          The fruit peel was cut in thick slices.  slices</code></pre>
+</div>
+</div>
+<div id="exercises-14.4.4.1" class="section level2">
+<h2>Exercises 14.4.4.1</h2>
+<div id="question-1-8" class="section level3">
+<h3>Question 1</h3>
+<p><strong>Find all words that come after a “number” like “one”, “two”, “three” etc. Pull out both the number and the word.</strong></p>
+<pre class="r"><code>numbers = c(&quot;zero&quot;,&quot;one&quot;,&quot;two&quot;,&quot;three&quot;,&quot;four&quot;,&quot;five&quot;,&quot;six&quot;,&quot;seven&quot;,&quot;eight&quot;,&quot;nine&quot;,
+         &quot;ten&quot;,&quot;eleven&quot;,&quot;twelve&quot;,&quot;thirteen&quot;,&quot;fourteen&quot;,&quot;fifteen&quot;) # assign chracter to numbers
+
+pattern &lt;- str_c(numbers, collapse = &quot;|&quot;)
+pattern &lt;- str_c(&quot;(&quot;, pattern, &quot;) ([^ \\.]+)&quot;)
+
+filter_sentences &lt;- sentences[str_detect(sentences, pattern)]
+
+number_word &lt;- str_extract_all(filter_sentences, pattern = pattern, simplify = TRUE)
+
+data.frame(filter_sentences, number_word)</code></pre>
+<pre><code>##                                filter_sentences            X1         X2
+## 1          Rice is often served in round bowls.    ten served           
+## 2         Lift the square stone over the fence.      one over           
+## 3   The rope will bind the seven books at once.   seven books           
+## 4        The two met while playing on the sand.       two met           
+## 5         There are more than two factors here.   two factors           
+## 6         He lay prone and hardly moved a limb.       one and           
+## 7               Type out three lists of orders.   three lists           
+## 8              Two plus seven is less than ten.      seven is           
+## 9        Drop the two when you add the figures.      two when           
+## 10        Torn scraps littered the stone floor.     one floor           
+## 11          There the flood mark is ten inches.    ten inches           
+## 12    The lamp shone with a steady green flame.      one with           
+## 13          We are sure that one war is enough.       one war           
+## 14 His shirt was clean but one button was gone.    one button           
+## 15      The fight will end in just six minutes.   six minutes           
+## 16            The purple tie was ten years old.     ten years           
+## 17     The copper bowl shone in the sun's rays.        one in           
+## 18   The kitten chased the dog down the street.    ten chased           
+## 19                   Each penny shone like new.      one like           
+## 20            Take two shares as a fair profit.    two shares           
+## 21     It's a dense crowd in two distinct ways.  two distinct           
+## 22        The cone costs five cents on Mondays.     one costs five cents
+## 23                Fasten two pins on each side.       ten two           
+## 24           The straw nest housed five robins.   five robins           
+## 25              Bottles hold four kinds of rum.    four kinds           
+## 26          The wall phone rang loud and often.      one rang           
+## 27        They told wild tales to frighten him.       ten him           
+## 28    The three story house was built of stone.   three story           
+## 29      Oats are a food eaten by horse and man.        ten by           
+## 30     The dusty bench stood by the stone wall.      one wall           
+## 31     It is a band of steel three inches wide.  three inches           
+## 32    A stiff cord will do to fasten your shoe.      ten your           
+## 33        A six comes up more often than a ten.     six comes   ten than
+## 34     It was done before the boy could see it.    one before           
+## 35     The mail comes in three batches per day. three batches           
+## 36       Slide the bill between the two leaves.    two leaves</code></pre>
+</div>
+<div id="question-2-7" class="section level3">
+<h3>Question 2</h3>
+<p><strong>Find all contractions. Separate out the pieces before and after the apostrophe.</strong></p>
+<pre class="r"><code>pattern &lt;- &quot;([A-Za-z]+)'([A-Za-z]+)&quot; # regex pattern
+
+filter_sentences &lt;- sentences[str_detect(sentences, pattern)] # use str_detect to filter first
+
+contractions &lt;- str_extract_all(filter_sentences, pattern, simplify = T) #str_extract_all to get matches
+
+
+pieces &lt;- str_split(contractions, pattern = &quot;'&quot;, simplify = T) 
+
+# show results as a table
+data.frame(filter_sentences, pieces)</code></pre>
+<pre><code>##                                filter_sentences       X1 X2
+## 1        It's easy to tell the depth of a well.       It  s
+## 2        The soft cushion broke the man's fall.      man  s
+## 3     Open the crate but don't break the glass.      don  t
+## 4     Add the store's account to the last cent.    store  s
+## 5  The beam dropped down on the workmen's head.  workmen  s
+## 6    Let's all join as we sing the last chorus.      Let  s
+## 7      The copper bowl shone in the sun's rays.      sun  s
+## 8           A child's wit saved the day for us.    child  s
+## 9       A ripe plum is fit for a king's palate.     king  s
+## 10     It's a dense crowd in two distinct ways.       It  s
+## 11     We don't get much money but we have fun.      don  t
+## 12      Ripe pears are fit for a queen's table.    queen  s
+## 13     We don't like to admit our small faults.      don  t
+## 14     Dig deep in the earth for pirate's gold.   pirate  s
+## 15       She saw a cat in the neighbor's house. neighbor  s</code></pre>
+</div>
+</div>
+<div id="exercises-14.4.5.1" class="section level2">
+<h2>Exercises 14.4.5.1</h2>
+<div id="question-1-9" class="section level3">
+<h3>Question 1</h3>
+<p><strong>Replace all forward slashes in a string with backslashes.</strong></p>
+<pre class="r"><code>replace_str &lt;- c(&quot;https/www&quot;, &quot;github/participation&quot;) # assign string to replace_str
+
+
+str_replace(replace_str, &quot;/&quot;, &quot;\\\\&quot;) # forward slashed with backslashes</code></pre>
+<pre><code>## [1] &quot;https\\www&quot;            &quot;github\\participation&quot;</code></pre>
+</div>
+<div id="question-2-8" class="section level3">
+<h3>Question 2</h3>
+<p><strong>Implement a simple version of <code>str_to_lower()</code> using <code>replace_all()</code>.</strong></p>
+<pre class="r"><code># create some strings to test
+letterscaps &lt;- c(LETTERS)
+
+# let's see the results of str_to_lower()
+str_to_lower(letterscaps)</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre class="r"><code># use replace_all() to get the same results
+str_replace_all(letterscaps, c(&quot;A&quot;=&quot;a&quot;, &quot;B&quot;=&quot;b&quot;, &quot;C&quot;=&quot;c&quot;, &quot;D&quot;=&quot;d&quot;, &quot;E&quot;=&quot;e&quot;, &quot;F&quot;=&quot;f&quot;, &quot;G&quot;=&quot;g&quot;, &quot;H&quot;=&quot;h&quot;, &quot;I&quot;=&quot;i&quot;, &quot;J&quot;=&quot;j&quot;, &quot;K&quot;=&quot;k&quot;, &quot;L&quot;=&quot;l&quot;, &quot;M&quot;=&quot;m&quot;, &quot;N&quot;=&quot;n&quot;, &quot;O&quot;=&quot;o&quot;, &quot;P&quot;=&quot;p&quot;, &quot;Q&quot;=&quot;q&quot;, &quot;R&quot;=&quot;r&quot;, &quot;S&quot;=&quot;s&quot;, &quot;T&quot;=&quot;t&quot;, &quot;U&quot;=&quot;u&quot;, &quot;V&quot;=&quot;v&quot;, &quot;W&quot;=&quot;w&quot;, &quot;X&quot;=&quot;x&quot;, &quot;Y&quot;=&quot;y&quot;, &quot;Z&quot;=&quot;z&quot;))</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
 </div>
 </div>
 </div>

@@ -48,21 +48,6 @@ library(testthat)
 ```
 
 
-```{r}
-install_load_packages <- function() {
-  
-x <- scan(what = "character")  
-
-if (length(setdiff(x, rownames(installed.packages()))) > 0) {
-  install.packages(setdiff(x, rownames(installed.packages())), dependencies = TRUE)  
-}
-
-sapply(x, library, character.only = TRUE)
-sessionInfo(package = x)
-
-}
-```
-
 
 # Task 1: Character data
 
@@ -848,4 +833,169 @@ more <- sentences[str_count(sentences, flickred) > 1]
 str_view_all(more, flickred)
 ```
 
-U
+se "\\b" in regex. "\\b" works at looking for whole words on searches. 
+
+
+### Question 2
+
+**From the Harvard sentences data, extract the following words.**
+
+**The first word from each sentence.**
+
+`str_extract()` extracts the first match in a string.
+
+```{r}
+
+sample <-sample(sentences, 20) # Set a random 20 sample from the sentences 
+
+first_words <- str_extract(sample, "[a-zA-Z]+") # str_extract for first word
+
+tibble(sample, first_words) %>% 
+  knitr::kable(col.names = c("Sentences", "1st-word"))
+```
+
+**All words ending in `ing`.**
+
+`str_extract_all()` tries to extract all matches from a string, and put them into a vector.
+
+```{r}
+
+end_ing <- str_extract_all(sentences, "\\b[a-zA-Z]+ing\\b", simplify = TRUE) # str_extract_all to get words in 'ing'
+
+
+end_ing2 <- end_ing[end_ing != ""] # every sentence only contains one words ending in "ing", remove all empty element
+
+head(tibble(sentences[end_ing != ""], end_ing2)) 
+```
+
+**All plurals.**
+
+Use multiple `str_detect` as it is too complicated to get all plurals in regex.
+
+
+```{r}
+
+regex <- "\\b[a-zA-Z]{3,}(ses|sses|shes|ches|xes|zes|sses|zzes|ves|ies|oes|s)\\b" # regex pattern
+
+sing <- sentences[str_detect(sentences, regex)]
+
+pluralSen <- str_extract_all(sing, pattern = regex, simplify = TRUE)
+
+data.frame(sing, pluralSen)[25:35,] 
+```
+
+
+## Exercises 14.4.4.1
+
+### Question 1
+
+**Find all words that come after a "number" like "one", "two", "three" etc. Pull out both the number and the word.**
+
+
+
+```{r}
+
+numbers = c("zero","one","two","three","four","five","six","seven","eight","nine",
+         "ten","eleven","twelve","thirteen","fourteen","fifteen") # assign chracter to numbers
+
+pattern <- str_c(numbers, collapse = "|")
+pattern <- str_c("(", pattern, ") ([^ \\.]+)")
+
+filter_sentences <- sentences[str_detect(sentences, pattern)]
+
+number_word <- str_extract_all(filter_sentences, pattern = pattern, simplify = TRUE)
+
+data.frame(filter_sentences, number_word)
+```
+
+### Question 2
+
+**Find all contractions. Separate out the pieces before and after the apostrophe.**
+
+```{r}
+
+pattern <- "([A-Za-z]+)'([A-Za-z]+)" # regex pattern
+
+filter_sentences <- sentences[str_detect(sentences, pattern)] # use str_detect to filter first
+
+contractions <- str_extract_all(filter_sentences, pattern, simplify = T) #str_extract_all to get matches
+
+
+pieces <- str_split(contractions, pattern = "'", simplify = T) 
+
+# show results as a table
+data.frame(filter_sentences, pieces)
+```
+
+## Exercises 14.4.5.1
+
+### Question 1
+
+**Replace all forward slashes in a string with backslashes.**
+
+```{r}
+replace_str <- c("https/www", "github/participation") # assign string to replace_str
+
+
+str_replace(replace_str, "/", "\\\\") # forward slashed with backslashes
+
+```
+
+
+### Question 2
+
+**Implement a simple version of `str_to_lower()` using `replace_all()`.**
+
+```{r}
+# create some strings to test
+letterscaps <- c(LETTERS)
+
+# let's see the results of str_to_lower()
+str_to_lower(letterscaps)
+
+# use replace_all() to get the same results
+str_replace_all(letterscaps, c("A"="a", "B"="b", "C"="c", "D"="d", "E"="e", "F"="f", "G"="g", "H"="h", "I"="i", "J"="j", "K"="k", "L"="l", "M"="m", "N"="n", "O"="o", "P"="p", "Q"="q", "R"="r", "S"="s", "T"="t", "U"="u", "V"="v", "W"="w", "X"="x", "Y"="y", "Z"="z"))
+```
+
+
+## 2. Writing functions
+
+I went with writting a utility function which is a general all package function called `install_load_packages`.
+
+The reason for writting this fucntion is, I always seem to spend some time loading packages when peer reviewing (yes I do load each of them and re-run them and evaluate them individually). As people have different approcahes in the way they approach a problems we are each used to a certain way we do certain things. I have tried simple appraches of loading multiple library, such as `library (tidyverse, gapminder)` which doesnt seem to work, it normally just loads one packages not the second ones. It would be a nice to have a standard were pacakages used are specified at the top of the `md` so one could just install them as needed like [here](https://github.com/STAT545-UBC-students/hw05-zeeva85/blob/master/hw05_gapminder.md). 
+
+As such, I have chosen to make this function for this assignment. I have attempted pass along the `seesioninfo()` as well after using this function as a means to be aware of what was loaded and what is not attached, which is useful to any user.
+
+This function prompts the required package in the console. Simply just type the names WITHOUT the `""` and enter. Following that the next package prompt would be required and the same step is required. When all the required packages have been key'ed in the console. One merely enters an empty entry once for it to close the prompt, look for the package availability and load it if its available. If it is not available it installs it and then loads them and finally outputting the session info in the console with the loaded packages including base packages and the loaded packages along with other system information useful for trouble shooting and reproducibility.
+
+It currently works only for CRAN, based packages. 
+
+**Ussage** 
+
+In cosole or in code chunk:-
+
+```{r}
+install_load_packages() # enter package name for each entry. Enter empty entry once when done.
+```
+
+
+The fucntion itself:-
+
+```{r}
+install_load_packages <- function() {
+  
+x <- scan(what = "character")  #  The prompt that request the package names
+
+# retrieving the names and length of all the installed packages. Then the input character length vector packages "x" is compared to the installed packages via setdiff(), where rows that appear on x but not y (rownames of packages). 
+
+
+if (length(setdiff(x, rownames(installed.packages()))) > 0) { # This differences differs if the package in not installed locally and would be evaluated "> 0" which satisfy the if loops.
+  install.packages(setdiff(x, rownames(installed.packages())), dependencies = TRUE)  
+} # Prompts the install.package now based on the character vectors not the length anymore and retrives dependencies.
+
+sapply(x, library, character.only = TRUE) # loads installed packages using library from the provided list
+sessionInfo(package = x) # loads session info of all running packages including system info 
+
+}
+```
+
