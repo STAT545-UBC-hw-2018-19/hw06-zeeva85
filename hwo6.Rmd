@@ -366,42 +366,45 @@ Check if all returns TRUE, No error is good.
 
 The `\` (blackslash) is an escape character in both `R` and `regex`. Backslash is used to start an escape sequence inside character constants. Escaping a character not in the following table is an error.
 
-`\n`	newline
-`\r`	carriage return
-`\t`	tab
-`\b`	backspace
-`\a`	alert (bell)
-`\f`	form feed
-`\v`	vertical tab
-`\\`	backslash \
-`\'`	ASCII apostrophe '
-`\"`	ASCII quotation mark "
-`\``	ASCII grave accent (backtick) `
-`\nnn`	character with given octal code (1, 2 or 3 digits)
-`\xnn`	character with given hex code (1 or 2 hex digits)
-`\unnnn`	Unicode character with given code (1--4 hex digits)
-`\Unnnnnnnn`	Unicode character with given code (1--8 hex digits)
+`\n`	newline  
+`\r`	carriage return  
+`\t`	tab   
+`\b`	backspace   
+`\a`	alert (bell)   
+`\f`	form feed    
+`\v`	vertical tab   
+`\\`	backslash \    
+`\'`	ASCII apostrophe '    
+`\"`	ASCII quotation mark "    
+`\``	ASCII grave accent (backtick) `    
+`\nnn`	character with given octal code (1, 2 or 3 digits)    
+`\xnn`	character with given hex code (1 or 2 hex digits)    
+`\unnnn`	Unicode character with given code (1--4 hex digits)     
+`\Unnnnnnnn`	Unicode character with given code (1--8 hex digits)     
+     
+
+   
+ When the `"\"` is used in `R`, `R` takes precedence and assumes its a special character for ussages such as `\n` or `\t` until and unless another special character is followed then it becomes a literal puncuation character. In `regex` the `\` is also a special character along with 12 other special characters and these needs to be escaped with a `\` before using them for literal special characters.  
 
 
- When the `"\"` is used in `R`, `R` takes precedence and assumes its a special character for ussages such as `\n` or `\t` until and unless another special character is followed then it becomes a literal puncuation character. In `regex` the `\` is also a special character along with 12 other special characters and these needs to be escaped with a `\` before using them for literal special characters.
-
- `\` - is a special character in R, when used singly leads to an incomplete expression error, `Error: Incomplete expression: "\"` in `R` when is evaluated in code chunk or results in the continuation `+` character when its run on the console or 
+    
+ `\` - is a special character in R, when used singly leads to an incomplete expression error, `Error: Incomplete expression: "\"` in `R` when is evaluated in code chunk or results in the continuation `+` character when its run on the console.
  
 ```{r eval = FALSE}
 # viewing the output of `\` as an code chunk error or a continuation character when is run in console
 cat("\") 
 ```
  
- 
-- `\\` is evaluated as an escape character followed by a backslash (`\`), this will be sent to the regular expression engine as a single back slash `\`. Remember that in regex the `\` is also a special character therefore the expression in incomplete in regex.
+     
+- `\\` is evaluated as an escape character followed by a backslash (`\`), this will be sent to the regular expression engine as a single back slash `\`. Remember that in regex the `\` is also a special character therefore the expression in incomplete in regex.    
 
 ```{r eval = FALSE}
 # viewing the output of `\\`
 cat("\\") # prints "\"
 ```
 
-
-- `\\\` is evaluated as an escape character followed by a backslash (`\`), and then an escape again this will be sent to the regular expression engine as a single back slash `\`
+     
+- `\\\` is evaluated as an escape character followed by a backslash (`\`), and then an escape again this will be sent to the regular expression engine as a single back slash `\`    
 
 ```{r eval = FALSE}
 # viewing the output of `\` as an code chunk error or a continuation character when is run in console
@@ -486,13 +489,14 @@ str_view(words, pattern = "x$", match = TRUE) # Use match = TRUE to only show wo
 **Are exactly three letters long. (Don't cheat by using `str_length()`!).**
 
 ```{r}
-str_view(words, pattern = "\\b...\\b", match = TRUE) # use the boundry before and after three any characters
+# use the random sampling where to keep markdown shorter
+str_view(sample(words, 50), pattern = "\\b...\\b", match = TRUE) # use the boundry before and after three any characters
 ```
 
 **Requirement 4: have seven letters or more.**
 
 ```{r}
-str_view(words, pattern = "\\b.......", match = TRUE) # use one boundry to define seven letters and more
+str_view(sample(words, 50),  pattern = "\\b.......", match = TRUE) # use one boundry to define seven letters and more
 
 ```
 
@@ -506,14 +510,14 @@ str_view(words, pattern = "\\b.......", match = TRUE) # use one boundry to defin
 ```{r}
 
 # find words that start with a vowel
-str_view(words, pattern = "^[aeiou]", match = TRUE)
+str_view(sample(words, 20), pattern = "^[aeiou]", match = TRUE) 
 ```
 
 **Create regular expressions that only contain consonants. (Hint: thinking about matching "not"-vowels.)**
 
 ```{r}
 # find words that without a vowel using the not "^" special character
-str_view(stringr::words, pattern = "^aeiou", match = T)
+str_view(words, pattern = "^aeiou", match = T)
 
 ```
 
@@ -645,7 +649,7 @@ str_view(words, pattern = "^[^aeoiu]{3}", match = TRUE)
 
 ```{r}
 # words that have three or more vowels in a row 
-str_view(stringr::words, pattern = "[aeoiu]{3,}", match = TRUE)
+str_view(words, pattern = "[aeoiu]{3,}", match = TRUE)
 ```
 
 **Create regular expressions to find all words that have two or more vowel-consonant pairs in a row.**
@@ -653,7 +657,7 @@ str_view(stringr::words, pattern = "[aeoiu]{3,}", match = TRUE)
 ```{r}
 
 # words that have two or more vowel-consonant pairs in a row
-str_view(words, pattern = "([aeoui][^aeoiu]){2,}", match = TRUE)
+str_view(sample(words, 50), pattern = "([aeoui][^aeoiu]){2,}", match = TRUE)
 ```
 
 ### Question 4
@@ -668,3 +672,180 @@ The following images are the results for the crosswords.
 ![](figs/fig3.png)  
 ![](figs/fig4.png)  
 ![](figs/fig5.png)  
+
+## Exercises 14.3.5.1
+
+### Question 1
+
+**Describe, in words, what these expressions will match:**
+
+- `(.)\1\1` regex, matches single character repeated in three succesion such as  "g**ooo**gle".   
+-  `"(.)(.)\\2\\1"` string expression, matches a two character direct palindromic repeat character such as "**noon**".   
+-  `(..)\1` regex, matches bi-repeated (two characters repeats) such as "**coco**".   
+-  `"(.).\\1.\\1"` string expression, matches five characters string with repeated group in 1st, 3rd and 5th position with any random character in 2nd and 4th place such as, "c**a**n**a**d**a**".   
+- `"(.)(.)(.).*\\3\\2\\1"` string expression, matches a three character palidrome with the middle having any ammount of character (0 or more). Making it 3 three chracter direct and non direct palidromic string such as "reviver".   
+
+### Question 2
+
+**Construct regular expressions to match words that start and end with the same character.**
+
+```{r}
+# match words that start and end with the same character
+str_view(words, pattern = "^(.).*\\1$", match = TRUE) 
+```
+
+**Construct regular expressions to match words that contain a repeated pair of letters (e.g. "church" contains "ch" repeated twice.)**
+
+```{r}
+# find words that contain a repeated pair of letters
+str_view(words, pattern = "(..).*\\1", match = TRUE)
+```
+
+**Construct regular expressions to match words that contain one letter repeated in at least three places (e.g. "eleven" contains three "e"s.)**
+
+```{r}
+# match words that contain one letter repeated in at least three places
+str_view(words, pattern = "(.).*\\1.*\\1", match = TRUE)
+```
+
+## Exercises 14.4.2
+
+### Question 1
+
+**For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple `str_detect()` calls.**
+
+**Find all words that start or end with x.**
+
+```{r}
+# single regex find words that start or end with x
+str_subset(words, pattern = "^x|x$")
+
+#  multiple str_detect() calls
+
+# positions start with x
+startxde <- str_detect(words, pattern = "^x") # logical vector of words starting with x
+# find positions end with x
+endxde <- str_detect(words, pattern = "x$") # logical vector of words ending with x
+
+# subset words using pipe
+words %>% 
+  `[`(startxde | endxde)
+
+# altenatively 
+
+words[endxde | startxde] # subsets the word vector with a logical vector for x at the start or end of a word.
+
+all(str_subset(words, pattern = "^x|x$") == words[endxde | startxde]) # check if they are the same
+```
+
+
+**Find all words that start with a vowel and end with a consonant.**
+
+```{r}
+
+# single regex
+str_subset(words, pattern = "^[aeiou].*[^aeiou]$")
+
+# multiple str_detect() calls
+
+startvowel <- str_detect(words, pattern = "^[aeiou]") # logical vector of start with consonants
+
+endconsde <- str_detect(words, pattern = "[^aeiou]$")  # logical vector of end with consonants
+
+# find subset that start or end with x
+words %>% 
+  `[`(startvowel & endconsde)
+
+```
+**Are there any words that contain at least one of each different vowel?**
+
+using `str_detect()` multiple approach there seems no word with all the vowels.
+
+```{r}
+
+# multiple str_detect() calls
+
+avowel <- str_detect(words, pattern = "[a]") # logical vector of start with vowel a
+evowel <- str_detect(words, pattern = "[e]") # logical vector of start with vowel e
+ivowel <- str_detect(words, pattern = "[i]") # logical vector of start with vowel i
+ovowel <- str_detect(words, pattern = "[o]") # logical vector of start with vowel o
+uvowel <- str_detect(words, pattern = "[u]") # logical vector of start with vowel u
+
+words %>% 
+  `[`(avowel & evowel & ivowel & ovowel & uvowel)
+
+
+# fucntion to test vowel
+
+# vowels_test <- function(v) {
+#   vowel <- c("a", "e", "i", "o", "u") #  vowels in vector vowel
+#   for (vowel in vowels) { # loop over each vowels
+#     check <- as.logical(seq_along(v)) & str_detect(v, pattern = vowel)
+#   }
+#   # return whether s contain at least one of each different vowel
+#   return(v[as.logical(seq_along(v))])
+# }
+# 
+# 
+# 
+# 
+# # create a test case
+# test_that("function contain_each_vowel() not works", {
+#   test_string <- "aberixowu"
+#   
+#   expect_equal(test_string, vowels_test(test_string))
+# })
+
+```
+
+### Question 2
+
+**What word has the highest number of vowels?**
+
+```{r}
+
+# find the words with the highest number of vowels
+words %>% 
+  `[`(which(str_count(words, pattern = "[aeiou]")  == # count the number of vowels
+              max(str_count(words, pattern = "[aeiou]"))))  # eval expression max and subset using which
+
+```
+
+
+**What word has the highest proportion of vowels? (Hint: what is the denominator?)**
+
+```{r}
+# find the words with the highest number of vowels
+stringr::words %>% 
+  `[`(which(str_count(words, pattern = "[aeiou]") # proportion of vowels in words
+            / str_length(words) == max(str_count(words, pattern = "[aeiou]") / str_length(words))))
+```
+
+`a` should have the highest proportion considering it is purely a vowel word.
+
+## Exercises 14.4.3.1
+
+### Question 1
+
+**In the previous example, you might have noticed that the regular expression matched "flickered", which is not a colour. Modify the regex to fix the problem.**
+
+
+```{r}
+
+colours <- c("red", "orange", "yellow", "green", "blue", "purple") # character vector of colors
+
+
+(colour_match <- str_c(colours, collapse = "|")) # colapse into single vector, so regex "|" or operator
+
+more <- sentences[str_count(sentences, colour_match) > 1]
+str_view_all(more, colour_match)
+
+
+(flickred <- str_c("\\b", colour_match, "\\b")) # boundry word matches \b to regex
+
+# view sentences with more than 1 match
+more <- sentences[str_count(sentences, flickred) > 1]
+str_view_all(more, flickred)
+```
+
+U
