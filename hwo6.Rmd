@@ -953,10 +953,194 @@ letterscaps <- c(LETTERS)
 # let's see the results of str_to_lower()
 str_to_lower(letterscaps)
 
-# use replace_all() to get the same results
-str_replace_all(letterscaps, c("A"="a", "B"="b", "C"="c", "D"="d", "E"="e", "F"="f", "G"="g", "H"="h", "I"="i", "J"="j", "K"="k", "L"="l", "M"="m", "N"="n", "O"="o", "P"="p", "Q"="q", "R"="r", "S"="s", "T"="t", "U"="u", "V"="v", "W"="w", "X"="x", "Y"="y", "Z"="z"))
+# use replace_all() 
+str_replace_all(letterscaps, c('A'='a', 'B'='b', 'C'='c', 'D'='d', 'E'='e', 'F'='f', 'G'='g', 'H'='h', 'I'='i', 'J'='j', 'K'='k', 'L'='l', 'M'='m', 'N'='n', 'O'='o', 'P'='p', 'Q'='q', 'R'='r', 'S'='s', 'T'='t', 'U'='u', 'V'='v', 'W'='w', 'X'='x', 'Y'='y', 'Z'='z'))
 ```
 
+### Question 3
+
+**Switch the first and last letters in words.**
+
+We use `str_replace()` to switch the letters. We split a word into three groups, the first letter, the middle part, and the third letts, then switch the other of the groups.
+
+```{r}
+switchQ3 <- str_replace(words, pattern = "(^[a-zA-Z])([a-zA-Z]*)([a-zA-Z]$)", replacement = "\\3\\2\\1") # first and last letter switch
+
+head(switchQ3)
+```
+
+**Which of those strings are still words?**
+
+```{r}
+# intersect(), to show words still intact
+head(intersect(words, switchQ3), 10) 
+```
+
+## Exercises 14.4.6.1
+
+### Question 1
+
+**Split up a string like "apples, pears, and bananas" into individual components.**
+
+`boundary(word)` to control `str_split()`.
+
+```{r}
+
+string <- c("apples, pears, and bananas")
+
+# use str_split() with boundary(word)
+str_split(string, boundary("word")) %>% 
+  `[[`(1) 
+```
+
+### Question 2
+
+**Why is it better to split up by `boundary("word")` than " "?**
+
+
+```{r}
+
+# use str_split() with " "
+str_split(string, " ") %>% 
+  `[[`(1) 
+```
+
+ `boundary("word")` only allows words that are selected out, instead of having punctuations and extra whitespaces by employing the " ".
+
+### Question 3
+
+**What does splitting with an empty string ("") do? Experiment, and then read the documentation.**
+
+```{r}
+# use str_split() with " "
+str_split(string, "") %>% 
+  `[[`(1) 
+```
+
+empty pattern, '', is equivalent to `boundary('character')`'"), empty string tries to split a strings into single characters.
+
+## Exercises 14.5.1
+
+### Question 1
+
+**How would you find all strings containing `\` with `regex()` vs. with `fixed()`?**
+
+we need to add escape fdor `R` and regex, if fixed is used only the escape character for regex is needed
+
+
+```{r}
+# create string to test
+string2 <- c("https\\www", "github\\participation")
+
+# using regex to find \
+str_view(string2, pattern = "\\\\")
+
+# using fixed() to find \
+str_view(string2, pattern = fixed("\\"))
+```
+
+
+### Question 2
+
+**What are the five most common words in `sentences`?**
+
+We first try to get all words in `sentences` using `str_extract_all()` with `boundary("word")`. Then we can convert the results into a tibble and use techniques discribes in STAT 545A to tidy up the data and find the most common words.
+
+```{r}
+word <- sentences %>%   # extract words from sentences
+  str_extract_all(boundary("word"), simplify = TRUE) %>%    # change to lower case for further analysis
+  str_to_lower()
+
+# convert results to tibble
+tibble(words = word) %>%   # n by words
+  count(words, sort = TRUE) %>%  
+  slice(2:6) 
+```
+
+
+## Exercises 14.7.1
+
+### Question 1
+
+**Find the stringi functions that fullfill the following requirements.**
+
+**Requirement 1: count the number of words.**
+
+We can use `stri_count_words()` for this requirement.
+
+```{r eval=FALSE}
+# create string to test
+test_string <- "This sentence has five words."
+
+# create a test case to test stri_count_words()
+test_that("The number of words is not correct", {
+  expect_equal(stri_count_words(test_string), 5)
+})
+```
+
+
+**Requirement 2: find duplicated strings.**
+
+We can use `stri_duplicated()` or `stri_duplicated_any()` for this requirement:
+
+- `stri_duplicated()` determines which strings in a character vector are duplicates of other elements.
+- `stri_duplicated_any()` determines if there are any duplicated strings in a character vector.
+
+We write a function using these two functions, so it can output duplicated strings if they exist.
+
+```{r eval=FALSE}
+# write a function to output duplicated strings if they exist
+output_duplicated <- function(v) {
+  if (any(stri_duplicated(v))) {
+    return(v[stri_duplicated_any(v)])
+  } else {
+    return(NA)
+  }
+}
+
+# create two vectors to test
+vector_duplicated <- c("unique", "duplicated", "duplicated")
+vector_unique <- c("all", "are", "unique")
+
+# crate a test suite to test our function
+test_that("output_duplicated() is not correct", {
+  expect_equal(output_duplicated(vector_duplicated), "duplicated")
+  expect_equal(output_duplicated(vector_unique), NA)
+})
+```
+
+**Requirement 3: generate random text.**
+
+We can use the following two functions for this requirement:
+
+- `stri_rand_strings()`: generate a (pseudo) random strings of desired lengths. The usage of it is as followed, which means that we can use `n` to control how many texts we want to generate, use `length` to control length, and use `pattern` to even decide what we want to generate.
+
+`stri_rand_strings(n, length, pattern = "[A-Za-z0-9]")`
+
+- `stri_rand_lipsum()`: generate a (pseudo) random *lorem ipsum* text consisting of a given number of text paragraphs.
+
+```{r eval=FALSE}
+# use stri_rand_strings() to generate random text (for example, password)
+stri_rand_strings(n = 5, length = 16, pattern = "[A-Za-z0-9!@$%\\^\\&*]") %>% 
+  knitr::kable(col.names = c("Random Text (Password)"))
+
+# use stri_rand_ipsum() to generate random text
+stri_rand_lipsum(1)
+```
+
+### Question 2
+
+**How do you control the language that stri_sort() uses for sorting?**
+
+According to the document shown using `?stri_sort`, we can use argument `opts_collator` to control the language uses for sorting. For example, we can try to sort french words.
+
+```{r eval=FALSE}
+# create vector to test
+french_words <- c("Bonjour", "Amour", "Bonheur", "Chat", "Chien")
+
+# use stri_sort() to sort french words, especially for Canadian French
+stri_sort(french_words, french = TRUE)
+```
 
 ## 2. Writing functions
 
@@ -974,7 +1158,7 @@ It currently works only for CRAN, based packages.
 
 In cosole or in code chunk:-
 
-```{r}
+```{r eval=FALSE}
 install_load_packages() # enter package name for each entry. Enter empty entry once when done.
 ```
 
